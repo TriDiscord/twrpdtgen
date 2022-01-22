@@ -52,7 +52,7 @@ class AIKManager:
 		self.ramdisk_path = self.path / "ramdisk"
 
 		LOGD("Cloning AIK...")
-		Repo.clone_from("https://github.com/SebaUbuntu/AIK-Linux-mirror", self.path)
+		Repo.clone_from("https://github.com/draekko/AIK-Linux", self.path)
 
 		new_image = self.path / "recovery.img"
 		copyfile(image, new_image)
@@ -62,16 +62,13 @@ class AIKManager:
 		try:
 			process = check_output(command, stderr=STDOUT, universal_newlines=True)
 		except CalledProcessError as e:
-			returncode = e.returncode
-			output = e.output
+			if self.debug:
+				print(e.output)
+			raise RuntimeError(f"AIK extraction failed, return code {e.returncode}")
 		else:
 			returncode = 0
 			output = process
 
-		if returncode != 0:
-			if self.debug:
-				print(output)
-			raise RuntimeError(f"AIK extraction failed, return code {returncode}")
 
 		kernel = self.get_extracted_info("kernel")
 		self.kernel = kernel if kernel.is_file() else None

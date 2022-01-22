@@ -102,8 +102,7 @@ class FstabEntry:
 		# Put together TWRP flags
 		self.flags = ['display="{}"'.format(self.displayed_name)]
 		if is_image:
-			self.flags += ['backup=1']
-			self.flags += ['flashimg=1']
+			self.flags += ['backup=1', 'flashimg=1']
 		else:
 			if self.name in PARTITION_BACKUP_FLAG:
 				self.flags += ['backup=1']

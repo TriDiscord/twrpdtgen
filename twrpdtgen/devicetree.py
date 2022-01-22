@@ -187,7 +187,7 @@ class DeviceTree:
 		except Exception:
 			git_global_email, git_global_name = None, None
 
-		if git_global_email is None or git_global_name is None:
+		if not all((git_global_email, git_global_name)):
 			git_config_writer.set_value('user', 'email', 'barezzisebastiano@gmail.com')
 			git_config_writer.set_value('user', 'name', 'Sebastiano Barezzi')
 
@@ -204,5 +204,5 @@ class DeviceTree:
 		return device_tree_folder
 
 	def cleanup(self):
-		# Cleanup
+		# AIK cleanup
 		self.aik.cleanup()

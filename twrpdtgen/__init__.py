@@ -1,6 +1,7 @@
-from jinja2 import Environment, FileSystemLoader
 import os
 from pathlib import Path
+from jinja2 import Environment, FileSystemLoader
+
 
 __version__ = "2.1.0"
 
